@@ -30,7 +30,9 @@ export default class App extends Component {
       <div>
         <Section title="Phonebook">
           <Form onAddName={this.addName} />
-          <ContactList onContacts={contacts} />
+          <Section title="Contacts">
+            <ContactList onContacts={contacts} />
+          </Section>
         </Section>
       </div>
     );
