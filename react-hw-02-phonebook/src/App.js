@@ -13,6 +13,7 @@ export default class App extends Component {
       { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+      { id: "id-5", name: "Roman", number: "227-91-27" },
     ],
     filter: "",
   };
@@ -23,11 +24,22 @@ export default class App extends Component {
       name: name,
       number: inputNumer,
     };
-    this.setState((prevState) => {
-      return {
-        contacts: [...prevState.contacts, listName],
-      };
-    });
+
+    let contacts = this.state.contacts;
+    let namesList = contacts
+      .map((contact) => contact.name)
+      .includes(listName.name);
+
+    console.log(namesList);
+    if (!namesList) {
+      this.setState((prevState) => {
+        return {
+          contacts: [...prevState.contacts, listName],
+        };
+      });
+    } else {
+      alert(`${listName.name} already in contacts`);
+    }
   };
 
   getFilter = () => {
