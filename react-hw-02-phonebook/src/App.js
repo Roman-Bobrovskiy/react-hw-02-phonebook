@@ -11,10 +11,11 @@ export default class App extends Component {
     name: "",
   };
 
-  addName = (text) => {
+  addName = (name, inputNumer) => {
     let listName = {
       id: uuidv4(),
-      name: text,
+      name: name,
+      number: inputNumer,
     };
     this.setState((prevState) => {
       return {
