@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 export default class Form extends Component {
   state = {
@@ -55,4 +55,8 @@ export default class Form extends Component {
   }
 }
 
-// Form.propTypes = {};
+Form.propTypes = {
+  onAddName: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  inputNumer: PropTypes.string,
+};
