@@ -2,13 +2,19 @@ import React, { Component } from "react";
 import Section from "./components/Section/Section";
 import Form from "./components/Fomr/Form";
 import ContactList from "./components/ContactList/ContactList";
+import Search from "./components/Search/Search";
 
 import { v4 as uuidv4 } from "uuid";
 
 export default class App extends Component {
   state = {
-    contacts: [],
-    name: "",
+    contacts: [
+      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+    ],
+    filter: "",
   };
 
   addName = (name, inputNumer) => {
@@ -24,15 +30,33 @@ export default class App extends Component {
     });
   };
 
+  getFilter = () => {
+    let { contacts, filter } = this.state;
+    // console.log(contacts.filter((contact) => contact.name.includes(filter)));
+    return contacts.filter((contact) => contact.name.includes(filter));
+  };
+
+  handleSearch = (event) => {
+    this.setState({ filter: event.target.value });
+    this.getFilter();
+  };
+
   render() {
-    let { contacts } = this.state;
-    console.log(contacts);
+    let { contacts, filter } = this.state;
+    let filterredList = this.getFilter();
+
     return (
       <div>
         <Section title="Phonebook">
           <Form onAddName={this.addName} />
           <Section title="Contacts">
-            <ContactList onContacts={contacts} />
+            <Search onHandleSearch={this.handleSearch} value={filter} />
+
+            {filterredList.length === 0 ? (
+              <ContactList contacts={contacts} />
+            ) : (
+              <ContactList contacts={filterredList} />
+            )}
           </Section>
         </Section>
       </div>

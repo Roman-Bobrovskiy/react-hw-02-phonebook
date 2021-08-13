@@ -1,10 +1,9 @@
 import React from "react";
 
-export default function ContactList({ onContacts }) {
-  console.log("on", onContacts);
+export default function ContactList({ contacts }) {
   return (
     <ol>
-      {onContacts.map((contact) => (
+      {contacts.map((contact) => (
         <li key={contact.id}>
           {contact.name} {contact.number}
         </li>
