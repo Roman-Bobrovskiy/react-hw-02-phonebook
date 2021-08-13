@@ -30,7 +30,8 @@ export default class App extends Component {
       .map((contact) => contact.name)
       .includes(listName.name);
 
-    console.log(namesList);
+    // console.log(namesList);
+
     if (!namesList) {
       this.setState((prevState) => {
         return {
@@ -53,6 +54,15 @@ export default class App extends Component {
     this.getFilter();
   };
 
+  removeContact = (id) => {
+    // console.log(id);
+    this.setState((prevState) => {
+      return {
+        contacts: prevState.contacts.filter((contact) => contact.id !== id),
+      };
+    });
+  };
+
   render() {
     let { contacts, filter } = this.state;
     let filterredList = this.getFilter();
@@ -65,9 +75,15 @@ export default class App extends Component {
             <Search onHandleSearch={this.handleSearch} value={filter} />
 
             {filterredList.length === 0 ? (
-              <ContactList contacts={contacts} />
+              <ContactList
+                onRemoveContact={this.removeContact}
+                contacts={contacts}
+              />
             ) : (
-              <ContactList contacts={filterredList} />
+              <ContactList
+                onRemoveContact={this.removeContact}
+                contacts={filterredList}
+              />
             )}
           </Section>
         </Section>
